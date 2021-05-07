@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp"
     android:fillViewport="true"
-    tools:context=".MainActivity">
+    tools:context=".ContatoActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +17,8 @@
             android:id="@+id/nomeCompletoEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome Completo"
+            android:hint="@string/nome_completo"
+            android:inputType="textPersonName"
             android:textSize="20sp"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -27,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textSize="20sp"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -39,59 +42,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:hint="Telefone"
+            android:hint="@string/telefone"
             android:textSize="20sp"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/emailEt" />
 
-        <RadioGroup
-            android:id="@+id/telefoneRg"
+        <Switch
+            android:id="@+id/comercialSw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:layout_margin="5dp"
+            android:hint="@string/comercial"
+            android:textSize="15sp"
+            android:layout_margin="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/telefoneEt">
-
-            <RadioButton
-                android:id="@+id/residencialRb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="Residencial" />
-
-            <RadioButton
-                android:id="@+id/comercialRb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Comercial" />
-
-        </RadioGroup>
+            app:layout_constraintTop_toBottomOf="@id/telefoneEt"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <CheckBox
             android:id="@+id/celularCk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickButton"
-            android:text="Adicionar telefone celular"
+            android:text="@string/adicionar_telefone_celular"
             android:textSize="15sp"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/telefoneRg" />
+            app:layout_constraintTop_toBottomOf="@id/comercialSw" />
 
         <EditText
             android:id="@+id/celularEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Celular"
+            android:hint="@string/celular"
             android:inputType="phone"
             android:visibility="gone"
             android:textSize="20sp"
@@ -104,7 +90,7 @@
             android:id="@+id/sitePessoalEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Site pessoal"
+            android:hint="@string/site_pessoal"
             android:textSize="20sp"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -116,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickButton"
-            android:text="Salvar"
+            android:text="@string/salvar"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -127,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickButton"
-            android:text="Enviar email"
+            android:text="@string/enviar_email"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -138,7 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickButton"
-            android:text="Ligar para telefone"
+            android:text="@string/ligar_para_telefone"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -149,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickButton"
-            android:text="Acessar site pessoal"
+            android:text="@string/acessar_site_pessoal"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -160,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickButton"
-            android:text="Exportar para PDF"
+            android:text="@string/exportar_para_pdf"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Contatos</string>
+    <string name="nome_completo">Nome Completo</string>
+    <string name="email">Email</string>
+    <string name="telefone">Telefone</string>
+    <string name="comercial">Comercial</string>
+    <string name="adicionar_telefone_celular">Adicionar telefone celular</string>
+    <string name="celular">Celular</string>
+    <string name="site_pessoal">Site pessoal</string>
+    <string name="salvar">Salvar</string>
+    <string name="enviar_email">Enviar email</string>
+    <string name="ligar_para_telefone">Ligar para telefone</string>
+    <string name="acessar_site_pessoal">Acessar site pessoal</string>
+    <string name="exportar_para_pdf">Exportar para PDF</string>
 </resources>
