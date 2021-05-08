@@ -1,9 +1,13 @@
 package br.edu.ifsp.scl.ads.pdm.contatos;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -15,7 +19,7 @@ public class ContatoActivity extends AppCompatActivity {
 
     private ActivityContatoBinding activityContatoBinding;
     private Contato contato;
-    //private final int PERMISSAO_LIGACAO_REQUEST_CODE = 0;
+    private final int LIGAR_TELEFONE_REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +78,29 @@ public class ContatoActivity extends AppCompatActivity {
     }
 
     private void ligarTelefone() {
-        //verificar permissao e versao 18M
         Intent ligarTelefoneIntent = new Intent(Intent.ACTION_CALL);
         ligarTelefoneIntent.setData(Uri.parse("tel:" + activityContatoBinding.telefoneEt.getText().toString()));
-        startActivity(ligarTelefoneIntent);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                startActivity(ligarTelefoneIntent);
+            } else {
+                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, LIGAR_TELEFONE_REQUEST_CODE);
+            }
+        } else {
+            startActivity(ligarTelefoneIntent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == LIGAR_TELEFONE_REQUEST_CODE) {
+            if (permissions[0].equals(Manifest.permission.CALL_PHONE) && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permissão de ligação é necessaria", Toast.LENGTH_SHORT).show();
+            }
+            ligarTelefone();
+        }
     }
 
     private void acessarSitePessoal() {
