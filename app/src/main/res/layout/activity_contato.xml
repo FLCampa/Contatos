@@ -79,7 +79,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/celular"
             android:inputType="phone"
-            android:visibility="gone"
             android:textSize="20sp"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -109,39 +108,6 @@
             app:layout_constraintTop_toBottomOf="@id/sitePessoalEt" />
 
         <Button
-            android:id="@+id/enviarEmailBt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButton"
-            android:text="@string/enviar_email"
-            android:layout_margin="5dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/salvarBt" />
-
-        <Button
-            android:id="@+id/ligarTelefoneBt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButton"
-            android:text="@string/ligar_para_telefone"
-            android:layout_margin="5dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/enviarEmailBt" />
-
-        <Button
-            android:id="@+id/acessarSitePessoalBt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickButton"
-            android:text="@string/acessar_site_pessoal"
-            android:layout_margin="5dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ligarTelefoneBt" />
-
-        <Button
             android:id="@+id/exportarPdfBt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -150,7 +116,7 @@
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/acessarSitePessoalBt" />
+            app:layout_constraintTop_toBottomOf="@id/salvarBt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

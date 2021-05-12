@@ -19,7 +19,6 @@ public class ContatoActivity extends AppCompatActivity {
 
     private ActivityContatoBinding activityContatoBinding;
     private Contato contato;
-    private final int LIGAR_TELEFONE_REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +42,8 @@ public class ContatoActivity extends AppCompatActivity {
             case R.id.salvarBt:
                 salvar();
                 break;
-            case R.id.enviarEmailBt:
-                enviarEmail();
-                break;
-            case R.id.ligarTelefoneBt:
-                ligarTelefone();
-                break;
-            case R.id.acessarSitePessoalBt:
-                acessarSitePessoal();
-                break;
             case R.id.exportarPdfBt:
                 break;
-            case R.id.celularCk:
-                addCellphoneChecked();
             default:
                 break;
         }
@@ -68,54 +56,4 @@ public class ContatoActivity extends AppCompatActivity {
         finish(); // fechar tela
     }
 
-    private void enviarEmail() {
-        Intent enviarEmailIntent = new Intent(Intent.ACTION_SENDTO); // msg sem anexo
-        enviarEmailIntent.setData(Uri.parse("mailto:"));
-        enviarEmailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{contato.getEmail()});
-        enviarEmailIntent.putExtra(Intent.EXTRA_SUBJECT, "contato");
-        enviarEmailIntent.putExtra(Intent.EXTRA_TEXT, contato.toString());
-        startActivity(enviarEmailIntent);
-    }
-
-    private void ligarTelefone() {
-        Intent ligarTelefoneIntent = new Intent(Intent.ACTION_CALL);
-        ligarTelefoneIntent.setData(Uri.parse("tel:" + activityContatoBinding.telefoneEt.getText().toString()));
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                startActivity(ligarTelefoneIntent);
-            } else {
-                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, LIGAR_TELEFONE_REQUEST_CODE);
-            }
-        } else {
-            startActivity(ligarTelefoneIntent);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == LIGAR_TELEFONE_REQUEST_CODE) {
-            if (permissions[0].equals(Manifest.permission.CALL_PHONE) && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permissão de ligação é necessaria", Toast.LENGTH_SHORT).show();
-            }
-            ligarTelefone();
-        }
-    }
-
-    private void acessarSitePessoal() {
-        Intent acessarSitePessoalIntent = new Intent(Intent.ACTION_VIEW);
-        acessarSitePessoalIntent.setData(Uri.parse("https://" + activityContatoBinding.sitePessoalEt.getText().toString()));
-        startActivity(acessarSitePessoalIntent);
-    }
-
-    private void addCellphoneChecked() {
-        if (activityContatoBinding.celularCk.isChecked()) {
-            activityContatoBinding.celularEt.setVisibility(View.VISIBLE);
-        }
-        else {
-            activityContatoBinding.celularEt.setVisibility(View.GONE);
-            activityContatoBinding.celularEt.setText("");
-        }
-    }
 }
