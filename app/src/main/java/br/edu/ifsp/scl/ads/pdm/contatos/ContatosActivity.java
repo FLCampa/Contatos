@@ -1,9 +1,5 @@
 package br.edu.ifsp.scl.ads.pdm.contatos;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,8 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,8 @@ public class ContatosActivity extends AppCompatActivity {
     private ArrayList<Contato> contatosList;
     private ContatosAdapter contatosAdapter;
     private final int NOVO_CONTATO_REQUEST_CODE = 0;
-    private final int LIGAR_TELEFONE_REQUEST_CODE = 0;
+    private final int LIGAR_TELEFONE_REQUEST_CODE = 0;      // VER
+    private final int EDITAR_CONTATO_REQUEST_CODE = 1;
     private Contato contato;
 
     @Override
@@ -39,7 +39,7 @@ public class ContatosActivity extends AppCompatActivity {
 
         // instanciar data source
         contatosList = new ArrayList<>();
-        // popularContatosList();
+        popularContatosList();
 
         // instanciar adapter
         contatosAdapter = new ContatosAdapter(
@@ -53,6 +53,29 @@ public class ContatosActivity extends AppCompatActivity {
 
         // registra ListView para menu de contexto
         registerForContextMenu(activityContatosBinding.contatosLv);
+
+        // associar um listener de clique para listView
+        activityContatosBinding.contatosLv.setOnItemClickListener((parent, view, position, id) -> {
+            contato = contatosList.get(position);
+            Intent detalhesIntent = new Intent(this, ContatoActivity.class);
+            detalhesIntent.putExtra(Intent.EXTRA_USER, contato);
+            startActivity(detalhesIntent);
+        });
+    }
+
+    private void popularContatosList() {
+        for (int i = 0; i < 20; i++) {
+            contatosList.add(
+                    new Contato(
+                            "Nome " + i,
+                            "E-mail " + i,
+                            "Telefone " + i,
+                            ( i % 2 == 0 ) ? false : true,
+                            "Celular " + i,
+                            "www.site" + i + ".com.br"
+                    )
+            );
+        }
     }
 
     @Override
@@ -88,6 +111,18 @@ public class ContatosActivity extends AppCompatActivity {
                 contatosAdapter.notifyDataSetChanged(); // notifica o adapter a alteracao no conjunto de dados
             }
         }
+        else {
+            if (requestCode == EDITAR_CONTATO_REQUEST_CODE && resultCode == RESULT_OK) {
+                // atualizar contato na lista
+                Contato contato = (Contato) data.getSerializableExtra(Intent.EXTRA_USER);
+                int posicao = data.getIntExtra(Intent.EXTRA_INDEX, -1);
+                if (contato != null && posicao != -1) {
+                    contatosList.remove(posicao);
+                    contatosList.add(posicao, contato);
+                    contatosAdapter.notifyDataSetChanged();
+                }
+            }
+        }
     }
 
     @Override
@@ -116,8 +151,10 @@ public class ContatosActivity extends AppCompatActivity {
             case R.id.detalhesContatoMi:
                 return true;
             case R.id.editarContatoMi:
+                editarContato(menuInfo.position);
                 return true;
             case R.id.removerContatoMi:
+                removeContato();
                 return true;
             default:
                 return false;
@@ -136,6 +173,18 @@ public class ContatosActivity extends AppCompatActivity {
         Intent acessarSitePessoalIntent = new Intent(Intent.ACTION_VIEW);
         acessarSitePessoalIntent.setData(Uri.parse("https://" + contato.getSite()));
         startActivity(acessarSitePessoalIntent);
+    }
+
+    private void editarContato(int position) {
+        Intent editarContatoIntent = new Intent(this, ContatoActivity.class);
+        editarContatoIntent.putExtra(Intent.EXTRA_USER, contato); // constante, contato
+        editarContatoIntent.putExtra(Intent.EXTRA_INDEX, position);
+        startActivityForResult(editarContatoIntent, EDITAR_CONTATO_REQUEST_CODE);
+    }
+
+    private void removeContato(){
+        contatosList.remove(contato);
+        contatosAdapter.notifyDataSetChanged();
     }
 
     private void ligarTelefone() {
