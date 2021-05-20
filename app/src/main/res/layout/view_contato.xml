@@ -15,22 +15,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--
     <TextView
         android:id="@+id/emailContatoTv"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="1"
         android:text="Email"
         app:layout_constraintEnd_toStartOf="@id/telefoneTv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nomeContatoTv" />
+     -->
+    <TextView
+        android:id="@+id/emailContatoTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nomeContatoTv" />
 
+    <!--
     <TextView
         android:id="@+id/telefoneTv"
-        android:layout_width="0dp"
+        android:layout_width="0px"
         android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="1"
         android:text="Telefone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/emailContatoTv"
         app:layout_constraintTop_toBottomOf="@id/nomeContatoTv" />
+     -->
+    <TextView
+        android:id="@+id/telefoneTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Telefone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailContatoTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,4 +12,9 @@
     <string name="ligar_para_telefone">Ligar para telefone</string>
     <string name="acessar_site_pessoal">Acessar site pessoal</string>
     <string name="exportar_para_pdf">Exportar para PDF</string>
+
+    <string name="ligar">Ligar</string>
+
+    <string name="editar">Editar</string>
+    <string name="remover">Remover</string>
 </resources>
